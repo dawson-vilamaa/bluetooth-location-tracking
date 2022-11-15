@@ -134,19 +134,21 @@ Meteor.methods({
   clearRecords: () => {
     patientInformationdb.remove({});
   },
-  async putPatientID(url, data) {
+   putPatientID(url, data) {
     try {
-      const response = await fetch(url, {
+      const response =  fetch(url, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
         headers: new Headers({
           "Content-Type": "application/json"
         }),
-        body: Buffer.from(JSON.stringify(data))
-      });
-      const res = await response.json();
-      return response(null, res);
+        body: JSON.stringify(data)
+      })
+      .then(res => console.log(res))
+     
+      
+     // return response(null, res);
     } catch (err) {
       console.error(err);
     }
